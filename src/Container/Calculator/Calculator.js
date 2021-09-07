@@ -5,14 +5,34 @@ const Calculator = () => {
     const [calc, setCalc] = useState({display: ''});
     const buttons = [1, 2, 3, '*', 4, 5, 6, '/', 7, 8, 9, '+', 'C', 0, '.', '-'];
 
+    const checkSing = (znak) => {
+        const prev = calc.display[calc.display.length-1];
+        let string = calc.display;
+        if ((prev === '/') || (prev === '*') || (prev === '-') || (prev === '+')) {
+            console.log('защло');
+            string = string.slice(0, -1);
+            console.log(string);
+            string = string + znak;
+            console.log(string);
+            setCalc({...calc, display: string});
+        } else {
+            setCalc({...calc, display: calc.display + znak});
+        }
+
+    }
+
     const onButtonHandle = e => {
         const value = e.target.value;
 
         if (value === 'C') {
             setCalc({...calc, display: ''});
-        } else {
+        }
+
+        else {
             setCalc({...calc, display: calc.display + value});
         }
+
+
     }
 
     const onResultHandle = () => {
@@ -20,53 +40,52 @@ const Calculator = () => {
     }
 
     const onKeyHandler = e => {
-        const key = e.keyCode
-        console.log('кнопка', e.keyCode);
+        const key = e.keyCode;
         switch (key) {
             case 96:
-                console.log('0');
+                setCalc({...calc, display: calc.display + '0'});
                 break;
             case 97:
-                console.log('1');
+                setCalc({...calc, display: calc.display + '1'});
                 break;
             case 98:
-                console.log('2');
+                setCalc({...calc, display: calc.display + '2'});
                 break;
             case 99:
-                console.log('3');
+                setCalc({...calc, display: calc.display + '3'});
                 break;
             case 100:
-                console.log('4');
+                setCalc({...calc, display: calc.display + '4'});
                 break;
             case 101:
-                console.log('5');
+                setCalc({...calc, display: calc.display + '5'});
                 break;
             case 102:
-                console.log('6');
+                setCalc({...calc, display: calc.display + '6'});
                 break;
             case 103:
-                console.log('7');
+                setCalc({...calc, display: calc.display + '7'});
                 break;
             case 104:
-                console.log('8');
+                setCalc({...calc, display: calc.display + '8'});
                 break;
             case 105:
-                console.log('9');
+                setCalc({...calc, display: calc.display + '9'});
                 break;
             case 106:
-                console.log('*');
+                checkSing('*');
                 break;
             case 107:
-                console.log('+');
+                checkSing('+');
                 break;
             case 109:
-                console.log('-');
+                checkSing('-');
                 break;
             case 111:
-                console.log('/');
+                checkSing('/');
                 break;
             case 27:
-                console.log('ESC');
+                setCalc({...calc, display: ''});
                 break;
             default:
                 console.log('X');
@@ -74,14 +93,14 @@ const Calculator = () => {
     }
 
     return (
-        <div
-            className="Calculator"
-            onKeyDown={onKeyHandler}
-        >
+        <div className="Calculator">
             <div className="Display">
                 {calc.display}
             </div>
-            <div className="Buttons">
+            <div
+                className="Buttons"
+                onKeyDown={onKeyHandler}
+                >
                 {buttons.map(button => (
                     <button
                         key={button}
