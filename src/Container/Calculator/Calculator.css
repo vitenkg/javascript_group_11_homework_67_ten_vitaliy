@@ -1,0 +1,42 @@
+.Calculator {
+    width: 300px;
+    margin-top: 20px;
+    border: 1px solid black;
+}
+
+.Display {
+    font-size: 22px;
+    margin: 5px auto;
+    text-align: end;
+    line-height: 50px;
+    width: 294px;
+    height: 50px;
+    border: 1px solid black;
+}
+
+.Buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 294px;
+    margin: 5px auto;
+    border: 1px solid black;
+}
+
+.butt {
+    font-size: 16px;
+    text-align: center;
+    width: 60px;
+    height: 30px;
+    border: 1px solid black;
+    background: lightgrey;
+    margin: 2px 4px;
+}
+
+.Result {
+    text-align: center;
+    width: 100%;
+    border: 1px solid black;
+    background: lightgrey;
+    margin: 2px 4px;
+}
