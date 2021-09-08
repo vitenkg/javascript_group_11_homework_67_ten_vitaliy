@@ -5,18 +5,15 @@ const Calculator = () => {
     const [calc, setCalc] = useState({display: ''});
     const buttons = [1, 2, 3, '*', 4, 5, 6, '/', 7, 8, 9, '+', 'C', 0, '.', '-'];
 
-    const checkSing = (znak) => {
+    const checkSing = sing => {
         const prev = calc.display[calc.display.length-1];
         let string = calc.display;
         if ((prev === '/') || (prev === '*') || (prev === '-') || (prev === '+')) {
-            console.log('защло');
             string = string.slice(0, -1);
-            console.log(string);
-            string = string + znak;
-            console.log(string);
+            string = string + sing;
             setCalc({...calc, display: string});
         } else {
-            setCalc({...calc, display: calc.display + znak});
+            setCalc({...calc, display: calc.display + sing});
         }
 
     }
@@ -32,11 +29,16 @@ const Calculator = () => {
             setCalc({...calc, display: calc.display + value});
         }
 
+        if ((value === '+') || (value === '-') || (value === '*') || (value === '/')) {
+            checkSing(value);
+        }
 
     }
 
     const onResultHandle = () => {
-        console.log('Result');
+        const tmp = {...calc};
+        const result = eval(tmp.display);
+        setCalc({...calc, display: result});
     }
 
     const onKeyHandler = e => {
