@@ -7,6 +7,7 @@
 .Display {
     font-size: 22px;
     margin: 5px auto;
+    padding: 0 5px;
     text-align: end;
     line-height: 50px;
     width: 294px;
