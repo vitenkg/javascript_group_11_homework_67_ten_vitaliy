@@ -12,7 +12,6 @@ const reducer = (state = initialState, action) => {
 
         if ((zero[0] === '0') && (zero.length < 2)) {
             zero = zero.substring(1) + number;
-            console.log(zero);
         } else {
             zero += number;
         }
@@ -40,6 +39,13 @@ const reducer = (state = initialState, action) => {
         return string;
     };
 
+    if (state.status) {
+        if (!payload) {
+            payload = state.display;
+        }
+        return {...state, display: payload, status: false};
+    }
+
     if (type === 'NUMBERS') {
         let enterNumbers = '';
 
@@ -52,22 +58,22 @@ const reducer = (state = initialState, action) => {
         if ((payload === '+') || (payload === '-') || (payload === '*') || (payload === '/') || (payload === '<') || (payload === '.')) {
             enterNumbers = checkSing(payload);
         }
-        console.log('Numbers: ', enterNumbers);
-        console.log('Numbers enter: ', type);
 
         return {...state, display: enterNumbers};
     }
 
     if (type === 'RESULT') {
         const prev = state.display[state.display.length - 1];
+        let evalResult = state.display;
         if ((prev === '+') || (prev === '-') || (prev === '*') || (prev === '/')) {
             return {...state};
         }
 
-        return {...state, display: eval(state.display)}
+        return {...state, display: eval(evalResult), status: true};
     }
 
     return state;
 }
+
 
 export default reducer;
