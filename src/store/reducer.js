@@ -32,7 +32,7 @@ const reducer = (state = initialState, action) => {
             if (string.length === 0) {
                 string = '0';
             }
-        } else if ((sing === '.') && (string.length < 2)) {
+        } else if ((sing === '.') && (prev === '.')) {
 
         } else {
             string += sing;
@@ -49,7 +49,7 @@ const reducer = (state = initialState, action) => {
             enterNumbers = checkZero(payload);
         }
 
-        if ((payload === '+') || (payload === '-') || (payload === '*') || (payload === '/') || (payload === '<')) {
+        if ((payload === '+') || (payload === '-') || (payload === '*') || (payload === '/') || (payload === '<') || (payload === '.')) {
             enterNumbers = checkSing(payload);
         }
         console.log('Numbers: ', enterNumbers);
